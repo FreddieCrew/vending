@@ -121,8 +121,7 @@ public __StartUsingEvent(playerid, type) {
 
 forward __EndUsingEvent(playerid, type);
 public __EndUsingEvent(playerid, type) {
-    static Float:
-     PrevHealth;
+    static Float: PrevHealth;
 
     GetPlayerHealth(playerid, PrevHealth);
 
