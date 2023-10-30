@@ -125,13 +125,13 @@ public __EndUsingEvent(playerid, type) {
 
     GetPlayerHealth(playerid, PrevHealth);
 
-    if (type == MACHINE_TYPE_SODA) {
+    if (type == MACHINE_TYPE_SODA && PrevHealth < 100.0) {
         SetPlayerHealth(playerid, PrevHealth + 30);
-        if (PrevHealth >= 90.0 && PrevHealth < 100.0) {
+        if (PrevHealth >= 90.0) {
             SetPlayerHealth(playerid, PrevHealth + 10);
         }
     }
-    else if(type == MACHINE_TYPE_SNACK) {
+    else if(type == MACHINE_TYPE_SNACK && PrevHealth < 100.0) {
         SetPlayerHealth(playerid, PrevHealth + 45);
         if (PrevHealth >= 90.0 && PrevHealth < 100.0) {
             SetPlayerHealth(playerid, PrevHealth + 10);
