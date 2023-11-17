@@ -14,3 +14,5 @@ DestroyVendingMachine(machineid);
 ```c
 public OnPlayerUseVendingMachine(playerid, type)
 ```
+
+Special thanks to [wuzi](https://github.com/wuzi) and [his server-side vending machine library](https://github.com/wuzi/vending), for giving me the kickstart to create this library.
