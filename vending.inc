@@ -337,8 +337,8 @@ stock GetVendingMachineRotation(id, &Float:RX, &Float:RY, &Float:RZ) {
     return 1;
 }
 stock GetXYInFrontOfVending(id, &Float:x, &Float:y, Float:distance) {
-    	// Function taken from https://github.com/wuzi/vending (Thanks to wuzi for inspiring me to create this system)!
-    	static Float:a, Float:z;
+    // Function taken from https://github.com/wuzi/vending (Thanks to wuzi for inspiring me to create this system)!
+    static Float:a, Float:z;
 	GetVendingMachineRotation(id, x, y, a);
 	GetVendingMachinePos(id, x, y, z);
 
@@ -347,7 +347,7 @@ stock GetXYInFrontOfVending(id, &Float:x, &Float:y, Float:distance) {
 
 	x += (distance * floatsin(-a, degrees));
 	y += (distance * floatcos(-a, degrees));
-    	return 1;
+    return 1;
 }
 
 stock bool:IsValidVendingMachine(id) {
