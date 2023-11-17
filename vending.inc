@@ -62,18 +62,18 @@ static __vendinginfo[MAX_VENDINGS][__vending];
 enum E_VENDING_MACHINE {
 	e_Model,
 	e_Interior,
-	Float:e_PosX,
-	Float:e_PosY,
-	Float:e_PosZ,
-	Float:e_RotX,
-	Float:e_RotY,
-	Float:e_RotZ,
-	Float:e_FrontX,
-	Float:e_FrontY,
-    e_Type
+	Float: e_PosX,
+	Float: e_PosY,
+	Float: e_PosZ,
+	Float: e_RotX,
+	Float: e_RotY,
+	Float: e_RotZ,
+	Float: e_FrontX,
+	Float: e_FrontY,
+    	e_Type
 }
 
-static const Float:sc_VendingMachines[][E_VENDING_MACHINE] = {
+static const Float: sc_VendingMachines[][E_VENDING_MACHINE] = {
 	{955, 0, -862.82, 1536.60, 21.98, 0.00, 0.00, 180.00, -862.84, 1537.60, 1},
 	{956, 0, 2271.72, -76.46, 25.96, 0.00, 0.00, 0.00, 2271.72, -77.46, 2},
 	{955, 0, 1277.83, 372.51, 18.95, 0.00, 0.00, 64.00, 1278.73, 372.07, 1},
@@ -341,7 +341,7 @@ stock GetVendingMachineRotation(id, &Float:RX, &Float:RY, &Float:RZ) {
 }
 stock GetXYInFrontOfVending(id, &Float:x, &Float:y, Float:distance) {
     // Function taken from https://github.com/wuzi/vending (Thanks to wuzi for inspiring me to create this system)!
-    static Float:a, Float:z;
+    	static Float:a, Float:z;
 	GetVendingMachineRotation(id, x, y, a);
 	GetVendingMachinePos(id, x, y, z);
 
@@ -371,8 +371,8 @@ stock DestroyVendingMachine(id) {
 
     #if defined Streamer_IncludeFileVersion
         DestroyDynamicObject(__vendinginfo[id][__objectid]);
-        #else
-            DestroyObject(__vendinginfo[id][__objectid]);
+    #else
+        DestroyObject(__vendinginfo[id][__objectid]);
     #endif
     return 1;
 }
@@ -397,8 +397,6 @@ forward vending_OnPlayerConnect(playerid);
 #if defined vending_OnPlayerKeyStateChange
 forward vending_OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
 #endif
-
-
 #if defined _ALS_OnGameModeInit
 	#undef OnGameModeInit
 #else
