@@ -191,8 +191,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42600, 0.0, 0.0, 0.0);
                 SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 1);
-            }
-            else if (__vendinginfo[i][__type] == MACHINE_TYPE_SNACK) {
+            } else if (__vendinginfo[i][__type] == MACHINE_TYPE_SNACK) {
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42601, 0.0, 0.0, 0.0);
                 SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 2);
@@ -220,13 +219,13 @@ public OnGameModeInit() {
 public OnPlayerConnect(playerid) {
     __PreloadAnimLibs(playerid);
 
-    for(new i = 0; i < sizeof(sc_VendingMachines); i++) {
+    for (new i = 0; i < sizeof(sc_VendingMachines); i++) {
 		RemoveBuildingForPlayer(playerid, sc_VendingMachines[i][e_Model], sc_VendingMachines[i][e_PosX], sc_VendingMachines[i][e_PosY], sc_VendingMachines[i][e_PosZ], 0.25);
 	}
 
     #if defined __vending_OnPlayerConnect
-    __vending_OnPlayerConnect(playerid);
-	#endif
+    	__vending_OnPlayerConnect(playerid);
+    #endif
     return 1;
 }
 
@@ -237,11 +236,10 @@ stock __PreloadAnimLibs(playerid) {
 
 forward __StartUsingEvent(playerid, type);
 public __StartUsingEvent(playerid, type) {
-    if(type == 1) {
+    if (type == 1) {
         ApplyAnimation(playerid, "VENDING", "VEND_Drink_P", 3.33, 0, 0, 0, 0, 0, 1);
         CallLocalFunction("OnPlayerUseVendingMachine", "ii", playerid, type);
-    }
-    else if(type == 2) {
+    } else if (type == 2) {
         ApplyAnimation(playerid, "VENDING", "VEND_Eat_P", 1.67, 0, 0, 0, 0, 0, 1);
         CallLocalFunction("OnPlayerUseVendingMachine", "ii", playerid, type);
     }
@@ -261,8 +259,7 @@ public __EndUsingEvent(playerid, type) {
         if (PrevHealth >= 90.0) {
             SetPlayerHealth(playerid, PrevHealth + 10);
         }
-    }
-    else if(type == MACHINE_TYPE_SNACK && PrevHealth < 100.0) {
+    } else if (type == MACHINE_TYPE_SNACK && PrevHealth < 100.0) {
         SetPlayerHealth(playerid, PrevHealth + 45);
         if (PrevHealth >= 90.0 && PrevHealth < 100.0) {
             SetPlayerHealth(playerid, PrevHealth + 10);
@@ -284,9 +281,9 @@ stock CreateVendingMachine(Float:X, Float:Y, Float:Z, Float:Rx, Float:Ry = 0.0, 
     switch (type) {
         case MACHINE_TYPE_SODA: {
             #if defined Streamer_IncludeFileVersion
-            __vendinginfo[__count][__objectid] = CreateDynamicObject(1775, X, Y, Z, Rx, Ry, Rz);
+            	__vendinginfo[__count][__objectid] = CreateDynamicObject(1775, X, Y, Z, Rx, Ry, Rz);
             #else
-            __vendinginfo[__count][__objectid] = CreateObject(1775, X, Y, Z, Rx, Ry, Rz);
+           	 __vendinginfo[__count][__objectid] = CreateObject(1775, X, Y, Z, Rx, Ry, Rz);
             #endif
             __vendinginfo[__count][__type] = 1;
         }
@@ -340,7 +337,7 @@ stock GetVendingMachineRotation(id, &Float:RX, &Float:RY, &Float:RZ) {
     return 1;
 }
 stock GetXYInFrontOfVending(id, &Float:x, &Float:y, Float:distance) {
-    // Function taken from https://github.com/wuzi/vending (Thanks to wuzi for inspiring me to create this system)!
+    	// Function taken from https://github.com/wuzi/vending (Thanks to wuzi for inspiring me to create this system)!
     	static Float:a, Float:z;
 	GetVendingMachineRotation(id, x, y, a);
 	GetVendingMachinePos(id, x, y, z);
@@ -350,7 +347,7 @@ stock GetXYInFrontOfVending(id, &Float:x, &Float:y, Float:distance) {
 
 	x += (distance * floatsin(-a, degrees));
 	y += (distance * floatcos(-a, degrees));
-    return 1;
+    	return 1;
 }
 
 stock bool:IsValidVendingMachine(id) {
@@ -385,7 +382,7 @@ stock DestroyVendingMachine(id) {
 #endif
 #define OnPlayerConnect vending_OnPlayerConnect
 #if defined vending_OnPlayerConnect
-forward vending_OnPlayerConnect(playerid);
+	forward vending_OnPlayerConnect(playerid);
 #endif
 
 #if defined _ALS_OnPlayerKeyStateChange
@@ -404,5 +401,5 @@ forward vending_OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
 #endif
 #define OnGameModeInit vending_OnGameModeInit
 #if defined vending_OnGameModeInit
-forward vending_OnGameModeInit();
+	forward vending_OnGameModeInit();
 #endif
