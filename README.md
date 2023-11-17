@@ -11,6 +11,6 @@ bool:IsValidVendingMachine(machineid);
 DestroyVendingMachine(machineid);
 ```
 ## Callbacks
-````c
+```c
 public OnPlayerUseVendingMachine(playerid, type)
 ```
