@@ -58,7 +58,7 @@ CMD:createvending(playerid, const params[]) {
 }
 
 LoadVendingMachines(const Path[]) {
-	static File: File, buffer[256], type, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, count = 0;
+	static File: File, buffer[256], type, Float: X, Float: Y, Float: Z, Float: rX, Float: rY, Float: rZ, count = 0;
 
 	File = fopen(Path, io_read);
 	if (!File) return printf("[Error]: The file %s does not exist on scriptfiles.\n", Path);
