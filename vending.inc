@@ -32,7 +32,7 @@ wuzi(https://github.com/wuzi/vending) and his server-side vending machine librar
 
 #tryinclude <a_samp>
 
-#define MAX_VENDINGS (100)
+#define MAX_VENDINGS (250)
 #define MACHINE_TYPE_SODA (1)
 #define MACHINE_TYPE_SNACK (2)
 #define MACHINE_RADIUS (0.7)
@@ -207,7 +207,11 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
 
 public OnGameModeInit() {
     for (new i = 0; i < sizeof(sc_VendingMachines); i++) {
-        CreateVendingMachine(sc_VendingMachines[i][e_PosX], sc_VendingMachines[i][e_PosY], sc_VendingMachines[i][e_PosZ]+0.7, sc_VendingMachines[i][e_RotX], sc_VendingMachines[i][e_RotY], sc_VendingMachines[i][e_RotZ], sc_VendingMachines[i][e_Type]);
+        if (sc_VendingMachines[i][e_Model] == 1776) {
+            CreateVendingMachine(sc_VendingMachines[i][e_PosX], sc_VendingMachines[i][e_PosY], sc_VendingMachines[i][e_PosZ], sc_VendingMachines[i][e_RotX], sc_VendingMachines[i][e_RotY], sc_VendingMachines[i][e_RotZ], sc_VendingMachines[i][e_Type]);
+        } else {
+            CreateVendingMachine(sc_VendingMachines[i][e_PosX], sc_VendingMachines[i][e_PosY], sc_VendingMachines[i][e_PosZ]+0.7, sc_VendingMachines[i][e_RotX], sc_VendingMachines[i][e_RotY], sc_VendingMachines[i][e_RotZ], sc_VendingMachines[i][e_Type]);
+        }
     }
 
     #if defined vending_OnGameModeInit
