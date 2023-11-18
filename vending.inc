@@ -243,28 +243,7 @@ public __StartUsingEvent(playerid, type) {
         ApplyAnimation(playerid, "VENDING", "VEND_Eat_P", 1.67, 0, 0, 0, 0, 0, 1);
         CallLocalFunction("OnPlayerUseVendingMachine", "ii", playerid, type);
     }
-    SetTimerEx("__EndUsingEvent", 8, false, "ii", playerid, type);
 
-    return 1;
-}
-
-forward __EndUsingEvent(playerid, type);
-public __EndUsingEvent(playerid, type) {
-    static Float: PrevHealth;
-
-    GetPlayerHealth(playerid, PrevHealth);
-
-    if (type == MACHINE_TYPE_SODA && PrevHealth < 100.0) {
-        SetPlayerHealth(playerid, PrevHealth + 30);
-        if (PrevHealth >= 90.0) {
-            SetPlayerHealth(playerid, PrevHealth + 10);
-        }
-    } else if (type == MACHINE_TYPE_SNACK && PrevHealth < 100.0) {
-        SetPlayerHealth(playerid, PrevHealth + 45);
-        if (PrevHealth >= 90.0 && PrevHealth < 100.0) {
-            SetPlayerHealth(playerid, PrevHealth + 10);
-        }
-    }
     return 1;
 }
 
