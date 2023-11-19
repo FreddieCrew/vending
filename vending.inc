@@ -180,18 +180,25 @@ native DestroyVendingMachine(machineid);
 
 
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
-    static Float:X, Float:Y;
+    static Float:X, Float:Y, Float:A[3], Float:pos[3];
+    GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
+
     if ((newkeys & KEY_SECONDARY_ATTACK) && !(oldkeys & KEY_SECONDARY_ATTACK) && GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && (GetPlayerAnimationIndex(playerid) != 1660) && (GetPlayerAnimationIndex(playerid) != 1657) && (GetPlayerAnimationIndex(playerid) != 1659)) {
         for (new i = 0; i < MAX_VENDINGS; i++) {
             GetXYInFrontOfVending(i, X, Y, 0.5);
-            if (!IsValidVendingMachine(__vendinginfo[i][__objectid]) || !IsPlayerInRangeOfPoint(playerid, MACHINE_RADIUS, X, Y, __vendinginfo[i][__posZ])) continue;
-
+            if (!IsValidVendingMachine(__vendinginfo[i][__objectid]) || !IsPlayerInRangeOfPoint(playerid, MACHINE_RADIUS, X-0.7, Y, __vendinginfo[i][__posZ])) continue;
 
             if (__vendinginfo[i][__type] == MACHINE_TYPE_SODA) {
+                GetVendingMachineRotation(i, A[0], A[1], A[2]);
+                SetPlayerPos(playerid, pos[0], pos[1]+0.2, pos[2]);
+                SetPlayerFacingAngle(playerid, A[2]+0.3);
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42600, 0.0, 0.0, 0.0);
                 SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 1);
             } else if (__vendinginfo[i][__type] == MACHINE_TYPE_SNACK) {
+                GetVendingMachineRotation(i, A[0], A[1], A[2]);
+                SetPlayerPos(playerid, pos[0], pos[1]+0.2, pos[2]);
+                SetPlayerFacingAngle(playerid, A[2]+0.3);
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42601, 0.0, 0.0, 0.0);
                 SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 2);
@@ -216,6 +223,17 @@ public OnGameModeInit() {
 
     #if defined vending_OnGameModeInit
         vending_OnGameModeInit();
+    #endif
+    return 1;
+}
+
+public OnGameModeExit() {
+    for(new i; i < sizeof(sc_VendingMachines); i++) {
+	DestroyVendingMachine(i);
+    }
+
+    #if defined vending_OnGameModeExit
+        vending_OnGameModeExit();
     #endif
     return 1;
 }
@@ -385,4 +403,13 @@ forward vending_OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
 #define OnGameModeInit vending_OnGameModeInit
 #if defined vending_OnGameModeInit
 	forward vending_OnGameModeInit();
+#endif
+#if defined _ALS_OnGameModeExit
+	#undef OnGameModeExit
+#else
+	#define _ALS_OnGameModeExit
+#endif
+#define OnGameModeExit vending_OnGameModeExit
+#if defined vending_OnGameModeExit
+	forward vending_OnGameModeExit();
 #endif
