@@ -186,7 +186,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
     if ((newkeys & KEY_SECONDARY_ATTACK) && !(oldkeys & KEY_SECONDARY_ATTACK) && GetPlayerState(playerid) == PLAYER_STATE_ONFOOT && (GetPlayerAnimationIndex(playerid) != 1660) && (GetPlayerAnimationIndex(playerid) != 1657) && (GetPlayerAnimationIndex(playerid) != 1659)) {
         for (new i = 0; i < MAX_VENDINGS; i++) {
             GetXYInFrontOfVending(i, X, Y, 0.5);
-            if (!IsValidVendingMachine(__vendinginfo[i][__objectid]) || !IsPlayerInRangeOfPoint(playerid, MACHINE_RADIUS, X-0.7, Y, __vendinginfo[i][__posZ])) continue;
+            if (!IsValidVendingMachine(i) || !IsPlayerInRangeOfPoint(playerid, MACHINE_RADIUS, X-0.7, Y, __vendinginfo[i][__posZ])) continue;
 
             if (__vendinginfo[i][__type] == MACHINE_TYPE_SODA) {
                 GetVendingMachineRotation(i, A[0], A[1], A[2]);
@@ -229,8 +229,8 @@ public OnGameModeInit() {
 
 public OnGameModeExit() {
     for(new i; i < sizeof(sc_VendingMachines); i++) {
-	DestroyVendingMachine(i);
-    }
+		DestroyVendingMachine(i);
+	}
 
     #if defined vending_OnGameModeExit
         vending_OnGameModeExit();
