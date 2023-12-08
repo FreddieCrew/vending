@@ -281,7 +281,7 @@ stock CreateVendingMachine(Float:X, Float:Y, Float:Z, Float:Rx, Float:Ry = 0.0, 
 
     switch (type) {
         case MACHINE_TYPE_SODA: {
-            #if defined Streamer_IncludeFileVersion
+            #if defined _streamer_included
             	__vendinginfo[__count][__objectid] = CreateDynamicObject(1775, X, Y, Z, Rx, Ry, Rz);
             #else
            	 __vendinginfo[__count][__objectid] = CreateObject(1775, X, Y, Z, Rx, Ry, Rz);
@@ -289,7 +289,7 @@ stock CreateVendingMachine(Float:X, Float:Y, Float:Z, Float:Rx, Float:Ry = 0.0, 
             __vendinginfo[__count][__type] = 1;
         }
         case MACHINE_TYPE_SNACK: {
-            #if defined Streamer_IncludeFileVersion
+            #if defined _streamer_included
                 __vendinginfo[__count][__objectid] = CreateDynamicObject(1776, X, Y, Z, Rx, Ry, Rz);
             #else
                 __vendinginfo[__count][__objectid] = CreateObject(1776, X, Y, Z, Rx, Ry, Rz);
@@ -367,7 +367,7 @@ stock DestroyVendingMachine(id) {
     __vendinginfo[id][__posRz] = 0.0;
     __vendinginfo[id][__id] = -1;
 
-    #if defined Streamer_IncludeFileVersion
+    #if defined _streamer_included
         DestroyDynamicObject(__vendinginfo[id][__objectid]);
     #else
         DestroyObject(__vendinginfo[id][__objectid]);
