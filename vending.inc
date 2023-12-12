@@ -194,14 +194,14 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
                 SetPlayerFacingAngle(playerid, A[2]+0.3);
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42600, 0.0, 0.0, 0.0);
-                SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 1);
+                SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, MACHINE_TYPE_SODA);
             } else if (__vendinginfo[i][__type] == MACHINE_TYPE_SNACK) {
                 GetVendingMachineRotation(i, A[0], A[1], A[2]);
                 SetPlayerPos(playerid, pos[0], pos[1]+0.2, pos[2]);
                 SetPlayerFacingAngle(playerid, A[2]+0.3);
                 ApplyAnimation(playerid, "VENDING", "VEND_USE", 10.0, 0, 0, 0, 0, 0, 1);
                 PlayerPlaySound(playerid, 42601, 0.0, 0.0, 0.0);
-                SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, 2);
+                SetTimerEx("__StartUsingEvent", 2500, false, "ii", playerid, MACHINE_TYPE_SODA);
             }
         }
     }
@@ -258,10 +258,10 @@ stock __PreloadAnimLibs(playerid) {
 
 forward __StartUsingEvent(playerid, type);
 public __StartUsingEvent(playerid, type) {
-    if (type == 1) {
+    if (type == MACHINE_TYPE_SODA) {
         ApplyAnimation(playerid, "VENDING", "VEND_Drink_P", 3.33, 0, 0, 0, 0, 0, 1);
         CallLocalFunction("OnPlayerUseVendingMachine", "ii", playerid, type);
-    } else if (type == 2) {
+    } else if (type == MACHINE_TYPE_SNACK) {
         ApplyAnimation(playerid, "VENDING", "VEND_Eat_P", 1.67, 0, 0, 0, 0, 0, 1);
         CallLocalFunction("OnPlayerUseVendingMachine", "ii", playerid, type);
     }
